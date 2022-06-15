@@ -15,8 +15,10 @@ export default function App() {
       setGoals((currentGoals) => [...currentGoals, {text: enteredGoalText, key: Math.random().toString()}])
   }
 
-  const deleteGoal = () => {
-    console.log('Delete');
+  const deleteGoal = (key) => {
+    setGoals(currentGoals => {
+      return currentGoals.filter(goal => goal.key !== key)
+    })
   }
 
   return (
@@ -24,7 +26,7 @@ export default function App() {
       <GoalInput onAddGoal={addGoalHandler} />
       <View style={styles.goalsContainer}>
         <FlatList data={goals.reverse()} renderItem={itemData => {
-          return <GoalItem text={itemData.item.text} onDeleteItem={deleteGoal} />
+          return <GoalItem text={itemData.item.text} id={itemData.item.key} onDeleteItem={deleteGoal} />
         }} />
       </View>
     </View>
