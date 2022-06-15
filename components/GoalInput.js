@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View,
     TextInput,
-    Button
+    Button,
+    Modal
 } from "react-native-web";
 
 const GoalInput = (props) => {
@@ -19,10 +20,23 @@ const GoalInput = (props) => {
     }
 
     return (
-        <View style={styles.inputContainer}>
-            <TextInput style={styles.textInput} placeholder='Your goal!' onChangeText={goalInputHandler} value={enteredGoalText} />
-            <Button title='Add Goal' onPress={addGoalHandler} />
-        </View>
+        <Modal visible={props.visible} animation='slide'>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Your goal!'
+                    onChangeText={goalInputHandler}
+                    value={enteredGoalText} />
+                <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Button title='Add Goal' onPress={addGoalHandler} />
+                    </View>
+                    <View style={styles.button}>
+                        <Button title='Cancel' onPress={props.onCancel} />
+                    </View>
+                </View>
+            </View>
+        </Modal>
     );
 }
 
@@ -31,9 +45,9 @@ export default GoalInput;
 const styles = StyleSheet.create({
     inputContainer: {
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
+        padding: 16,
         paddingBottom: 24,
         borderBottomWidth: 1,
         borderBottomColor: '#cccccc'
@@ -41,8 +55,15 @@ const styles = StyleSheet.create({
       textInput: {
         borderWidth: 1,
         borderColor: '#cccccc',
-        width: '70%',
-        marginRight: 8,
+        width: '100%',
         padding: 8
       },
+      buttonContainer: {
+        marginTop: 16,
+        flexDirection: 'row'
+      },
+      button: {
+        width: 100,
+        marginHorizontal: 8
+      }
 })
