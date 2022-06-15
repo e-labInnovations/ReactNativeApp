@@ -4,7 +4,8 @@ import {
     View,
     TextInput,
     Button,
-    Modal
+    Modal,
+    Image
 } from "react-native-web";
 
 const GoalInput = (props) => {
@@ -22,6 +23,7 @@ const GoalInput = (props) => {
     return (
         <Modal visible={props.visible} animation='slide'>
             <View style={styles.inputContainer}>
+                <Image source={require('../assets/images/goal.png')} style={styles.image} />
                 <TextInput
                     style={styles.textInput}
                     placeholder='Your goal!'
@@ -29,10 +31,10 @@ const GoalInput = (props) => {
                     value={enteredGoalText} />
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}>
-                        <Button title='Add Goal' onPress={addGoalHandler} />
+                        <Button title='Cancel' onPress={props.onCancel} />
                     </View>
                     <View style={styles.button}>
-                        <Button title='Cancel' onPress={props.onCancel} />
+                        <Button title='Add Goal' onPress={addGoalHandler} />
                     </View>
                 </View>
             </View>
@@ -48,15 +50,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
-        paddingBottom: 24,
-        borderBottomWidth: 1,
-        borderBottomColor: '#cccccc'
       },
       textInput: {
         borderWidth: 1,
         borderColor: '#cccccc',
+        borderRadius: 6,
         width: '100%',
-        padding: 8
+        padding: 12
       },
       buttonContainer: {
         marginTop: 16,
@@ -65,5 +65,10 @@ const styles = StyleSheet.create({
       button: {
         width: 100,
         marginHorizontal: 8
+      },
+      image: {
+        width: 100,
+        height: 100,
+        margin: 20
       }
 })
