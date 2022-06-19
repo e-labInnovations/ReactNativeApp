@@ -1,5 +1,5 @@
 # React Native App
-Learing React Native with Academind
+Learning React Native with Academind
 
 ## Notes
 expo init appname -> Start new project
